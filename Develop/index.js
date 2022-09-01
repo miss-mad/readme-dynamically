@@ -1,82 +1,76 @@
 // "require" is a way to target a file or package needed to create this readme generator app
+// in the first two cases, "require" allows us to use certain packages within this js file
 const inquirer = require("inquirer");
 const fs = require("fs");
-// const generateMarkdown = require("./utils/generateMarkdown");
+// in this case, information from another js file is imported so that we can use it in this one
+const generateMarkdown = require("./utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
-
-// inquirer guide
-// inquirer
-//   .prompt([
-//     /* Pass your questions in here */
-//   ])
-//   .then((answers) => {
-//     // Use user feedback for... whatever!!
-//   })
-//   .catch((error) => {
-//     if (error.isTtyError) {
-//       // Prompt couldn't be rendered in the current environment
-//     } else {
-//       // Something else went wrong
-//     }
-//   });
-
 function questions() {
   inquirer
     .prompt([
-      // index from const questions?
+
+      // Possible type values: input (string), number (must have # or returns NaN), confirm (Y/N and returns false), list (choose one from a list), rawlist (choose one from a list - more primitive looking), expand (??), checkbox (check one or multiple from a list; complicated selection process), password (hides whatever you type), editor (launches user's preferred text editor (notepad) and then displays the content as the result)
       {
         type: "input",
         message: "What is the title of your project?",
-        name: "projectTitle",
+        name: "title",
       },
       {
         type: "input",
-        message: "What is your project tagline?",
-        name: "projectTagline",
+        message: "What is your project tagline? (A short phrase or slogan to summarize the project)",
+        name: "tagline",
       },
       {
         type: "input",
         message: "What is your project description?",
-        name: "projectDescription",
+        name: "description",
       },
       // {
-      //   type: "input",
-      //   message: "What is your preferred method of communication?",
-      //   choices: ["SMS", "email", "call"],
-      //   name: "communication",
+      //   type: "confirm",
+      //   message: "Does your project have a deployed application link?",
+      //   name: "deployedApplicationLink",
       // },
+      {
+        type: "input",
+        message: "What is your project description?",
+        name: "description",
+      },
+
     ])
 
+    // the .prompt returns answers and .then catches those answers
     .then((answers) => {
       console.log(answers);
+      // then calls the writeToFile() function to write answers into a newly created README.md file
       writeToFile(answers);
     })
 
+    // if there are any errors, the function should log the error to the console; otherwise, shout, "success!"
     .catch((error) => {
       if (error.isTtyError) {
         console.log(error);
       } else {
-        console.log("Success!");
+        console.log("Success! (but no README generated)");
       }
     });
 }
 
 // TODO: Create a function to write README file
 function writeToFile(answers) {
-  console.log("writeToFile is working");
-  fs.writeFile("README.md", JSON.stringify(answers, null, "  "), (err) => {
+  // "fs" stands for "file-system" and is something built into node.js to allow us to read and write files. in this case, we're writing (creating) a new README.md file and then calling the generateMarkdown() function to populate the file with the format and information we want.
+  fs.writeFile("README.md", generateMarkdown(answers), (err) => {
+    // another error-catcher
     err ? console.log(err) : console.log("README successfully created!");
   });
 }
 
 // TODO: Create a function to initialize app
+// this function calls the questions() function to start the whole thing off
 function init() {
   questions();
-  // writeToFile(answers);
-  // generateMarkdown();
 }
-// Function call to initialize app
+// and of course, we need to call the function that starts everything off
 init();
 
 // GIVEN a command-line application that accepts user input
