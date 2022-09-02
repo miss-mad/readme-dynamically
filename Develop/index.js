@@ -20,7 +20,7 @@ function questions() {
       // checkbox (check one or multiple from a list complicated selection process)
       // password (hides whatever you type)
       // editor (launches user's preferred text editor (notepad) and then displays the content as the result)
-      // ---- Help section ----
+      // -------------- HELP SECTION -------------
       {
         type: "confirm",
         message:
@@ -40,7 +40,7 @@ function questions() {
         name: "noHelpREADME",
         when: (answer) => answer.helpREADME === false,
       },
-      // ---- end of Help section ----
+      // ----------- END OF HELP SECTION -----------
       {
         type: "input",
         message: "What is the title of your project?",
@@ -81,64 +81,64 @@ function questions() {
         name: "description",
       },
       // returns project description in README
-      // ---- Deployed App Link section ----
-      {
-        type: "confirm",
-        message: "Does your project have a deployed application link?",
-        name: "deployedApplicationLinkConfirm",
-      },
+      // ------- DEPLOYED APP LINK SECTION -------
+      // {
+      //   type: "confirm",
+      //   message: "Does your project have a deployed application link?",
+      //   name: "deployedApplicationLinkConfirm",
+      // },
       {
         type: "input",
         message: "Paste your deployed application link here:",
         name: "deployedApplicationLink",
-        when: (answer) => answer.deployedApplicationLinkConfirm === true,
+        // when: (answer) => answer.deployedApplicationLinkConfirm === true,
       },
-      {
-        type: "input",
-        message: "If no deployed application link, press ENTER to continue",
-        name: "noDeployedApplicationLink",
-        when: (answer) => answer.deployedApplicationLinkConfirm === false,
-        default: (answer) => {
-          if (answer.deployedApplicationLinkConfirm === false) {
-            return "";
-          }
-        },
-      },
+      // {
+      //   type: "input",
+      //   message: "If no deployed application link, press ENTER to continue",
+      //   name: "noDeployedApplicationLink",
+      //   when: (answer) => answer.deployedApplicationLinkConfirm === false,
+      //   default: (answer) => {
+      //     if (answer.deployedApplicationLinkConfirm === false) {
+      //       return "";
+      //     }
+      //   },
+      // },
       // checks if project has a deployed application link; if so, then returns deployed application link in README, if not, user moves on
-      // ---- end of Deployed App Link section ----
+      // ----- END OF DEPLOYED APP LINK SECTION -----
       {
         type: "input",
         message: "Detail how to install this app, step-by-step",
         name: "installation",
       },
       // returns app installation instructions in README
-      // ---- Screenshots section ----
-      {
-        type: "confirm",
-        message:
-          "Do you have screenshots of your project that you would like to include?",
-        name: "usageScreenshotsConfirm",
-      },
+      // ----------- SCREENSHOTS SECTION -----------
+      // {
+      //   type: "confirm",
+      //   message:
+      //     "Do you have screenshots of your project that you would like to include?",
+      //   name: "usageScreenshotsConfirm",
+      // },
       {
         type: "input",
         message:
-          "First upload screenshots to appropriate folder within project, then create their path here with this syntax: ![<Project title> screenshot 1](<relative path to screenshot>)",
+          "Add screenshots to README. First upload screenshots to appropriate folder within project, then create their path here with this syntax: ![<Project title> screenshot 1](<relative path to screenshot>)",
         name: "uploadScreenshots",
-        when: (answer) => answer.usageScreenshotsConfirm === true,
+        // when: (answer) => answer.usageScreenshotsConfirm === true,
       },
-      {
-        type: "input",
-        message: "If no screenshots, press ENTER to continue",
-        name: "noScreenshots",
-        when: (answer) => answer.usageScreenshotsConfirm === false,
-        default: (answer) => {
-          if (answer.usageScreenshotsConfirm === false) {
-            return "";
-          }
-        },
-      },
+      // {
+      //   type: "input",
+      //   message: "If no screenshots, press ENTER to continue",
+      //   name: "noScreenshots",
+      //   when: (answer) => answer.usageScreenshotsConfirm === false,
+      //   default: (answer) => {
+      //     if (answer.usageScreenshotsConfirm === false) {
+      //       return noScreenshots();
+      //     }
+      //   },
+      // },
       // checks if project has accompanying screenshots; if so, then requests a certain syntax (for markdown) and returns dynamically created screenshots in README, if not, user moves on
-      // ---- end of Screenshots section ----
+      // -------- END OF SCREENSHOTS SECTION --------
       {
         type: "input",
         message: "What improvements would you make to this app in the future?",
@@ -169,55 +169,55 @@ function questions() {
         name: "resourceLinks",
       },
       // returns links to resources or tutorials in README
-      {
-        type: "input",
-        message:
-          "What is your Github URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://github.com/)",
-        name: "github",
-        validate: function (github) {
-          // Regex validation
-          if (/^(ftp|http|https):\/\/[^ "]+$/.test(github) === true) {
-            return /^(ftp|http|https):\/\/[^ "]+$/.test(github);
-          } else {
-            return console.log(" Please enter a valid Github URL.");
-          }
-        },
-      },
-      // validates the user entered a Github URL, then returns the user's Github URL in README
-      {
-        type: "input",
-        message:
-          "What is your LinkedIn URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://linkedin.com/)",
-        name: "linkedIn",
-        validate: function (linkedIn) {
-          // Regex validation
-          if (/^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn) === true) {
-            return /^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn);
-          } else {
-            return console.log(" Please enter a valid LinkedIn URL.");
-          }
-        },
-      },
-      // validates the user entered a LinkedIn URL, then returns the user's linkedin URL in README
-      {
-        type: "input",
-        message: "What is your email?",
-        name: "email",
-        validate: function (email) {
-          // Regex validation
-          if (
-            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-              email
-            ) === true
-          ) {
-            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-              email
-            );
-          } else {
-            return console.log(" Please enter a valid email.");
-          }
-        },
-      },
+      // {
+      //   type: "input",
+      //   message:
+      //     "What is your Github URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://github.com/)",
+      //   name: "github",
+      //   validate: function (github) {
+      //     // Regex validation
+      //     if (/^(ftp|http|https):\/\/[^ "]+$/.test(github) === true) {
+      //       return /^(ftp|http|https):\/\/[^ "]+$/.test(github);
+      //     } else {
+      //       return console.log(" Please enter a valid Github URL.");
+      //     }
+      //   },
+      // },
+      // // validates the user entered a Github URL, then returns the user's Github URL in README
+      // {
+      //   type: "input",
+      //   message:
+      //     "What is your LinkedIn URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://linkedin.com/)",
+      //   name: "linkedIn",
+      //   validate: function (linkedIn) {
+      //     // Regex validation
+      //     if (/^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn) === true) {
+      //       return /^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn);
+      //     } else {
+      //       return console.log(" Please enter a valid LinkedIn URL.");
+      //     }
+      //   },
+      // },
+      // // validates the user entered a LinkedIn URL, then returns the user's linkedin URL in README
+      // {
+      //   type: "input",
+      //   message: "What is your email?",
+      //   name: "email",
+      //   validate: function (email) {
+      //     // Regex validation
+      //     if (
+      //       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+      //         email
+      //       ) === true
+      //     ) {
+      //       return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+      //         email
+      //       );
+      //     } else {
+      //       return console.log(" Please enter a valid email.");
+      //     }
+      //   },
+      // },
       // validates the user entered an email, then returns the user's email in README
     ])
 
@@ -233,7 +233,7 @@ function questions() {
       if (error.isTtyError) {
         console.log(error);
       } else {
-        console.log("Success! (but no README generated)");
+        console.log("Success! (but no README generated - something is probably missing from the generateMarkdown)");
       }
     });
 }
