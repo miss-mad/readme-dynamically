@@ -23,7 +23,8 @@ function questions() {
       // ---- Help section ----
       {
         type: "confirm",
-        message: "You're about to create the README of your life. First, do you want some help?",
+        message:
+          "You're about to create the README of your life. First, do you want some help?",
         name: "helpREADME",
       },
       {
@@ -139,25 +140,46 @@ function questions() {
       // returns links to resources or tutorials in README
       {
         type: "input",
-        message: "What is your Github URL?",
+        message:
+          "What is your Github URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://github.com/)",
         name: "github",
-        // validate: 
+        validate: function (github) {
+          // Regex validation
+          if (/^(ftp|http|https):\/\/[^ "]+$/.test(github) === true) {
+            return /^(ftp|http|https):\/\/[^ "]+$/.test(github);
+          } else {
+            return console.log(" Please enter a valid Github URL.");
+          }
+        },
       },
-      // returns the user's github URL in README
+      // validates the user entered a Github URL, then returns the user's Github URL in README
       {
         type: "input",
-        message: "What is your LinkedIn URL?",
+        message:
+          "What is your LinkedIn URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://linkedin.com/)",
         name: "linkedIn",
-        // validate: 
+        validate: function (linkedIn) {
+          // Regex validation
+          if (/^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn) === true) {
+            return /^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn);
+          } else {
+            return console.log(" Please enter a valid LinkedIn URL.");
+          }
+        },
       },
-      // returns the user's linkedin URL in README
+      // validates the user entered a LinkedIn URL, then returns the user's linkedin URL in README
       {
         type: "input",
         message: "What is your email?",
         name: "email",
-        // validate: 
+        validate: function (email) {
+          // Regex validation
+          return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+            email
+          );
+        },
       },
-      // returns the user's email in README
+      // validates the user entered an email, then returns the user's email in README
     ])
 
     // the .prompt returns answers and .then catches those answers
