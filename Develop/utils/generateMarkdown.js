@@ -1,7 +1,7 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 
-function renderLicenseBadge(license) {
+function renderLicenseBadgeAndLink(license) {
   switch (license) {
     case "Apache License 2.0":
       return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
@@ -31,22 +31,24 @@ function renderLicenseBadge(license) {
       return "[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)";
 
     default:
-      return "None";
+      return "";
   }
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {}
+// function renderLicenseLink(license) {}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+// function renderLicenseSection(license) {}
 
 // TODO: Create a function to generate markdown for README
+// used object desctructuring to pull the properties out of the .prompt within the questions() function
 const generateMarkdown = ({
   title,
   tagline,
+  license,
   description,
   deployedApplicationLink,
   installation,
@@ -59,15 +61,14 @@ const generateMarkdown = ({
   github,
   linkedIn,
   email,
+  licenseInformation,
 }) => {
   return `# ${title}
   ${tagline}
   
   ## License
   
-  ${renderLicenseBadge()}
-  ${renderLicenseLink()}
-  ${renderLicenseSection()}
+  ${renderLicenseBadgeAndLink(license)}
   
   ## Table of Contents
   
@@ -80,6 +81,7 @@ const generateMarkdown = ({
   - [Tests](#tests)
   - [Credits](#credits)
   - [Questions](#questions)
+  - [License Information](#license-information)
 
   ## Description
   
@@ -125,10 +127,15 @@ const generateMarkdown = ({
 
   Any questions? I'd love to hear from you!
   Contact me at:
-  ${github}, ${linkedIn}, or good old fashioned ${email}.
+  ${github}, ${linkedIn}, or good old fashioned email ${email}.
+
+  ## License Information
+
+  ${licenseInformation}
   
   ---
 `;
 };
 
+// exports this js file (makes this file available to wherever we require it)
 module.exports = generateMarkdown;

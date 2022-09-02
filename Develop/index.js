@@ -36,7 +36,7 @@ function questions() {
       },
       {
         type: "input",
-        message: "You're a pro! Press ENTER",
+        message: "You're a pro! Press ENTER to continue",
         name: "noHelpREADME",
         when: (answer) => answer.helpREADME === false,
       },
@@ -54,6 +54,27 @@ function questions() {
         name: "tagline",
       },
       // returns project tagline in README
+      {
+        type: "list",
+        message: "Choose a license.",
+        choices: [
+          "Apache License 2.0",
+          "GNU General Public License v 3.0",
+          "MIT License",
+          "BSD 2-Clause Simplified License",
+          "BSD 3-Clause New/Revised License",
+          "Boost Software License 1.0",
+          "Creative Commons Zero v 1.0 Universal",
+          "Eclipse Public License 2.0",
+          "GNU Affero General Public License v 3.0",
+          "GNU General Public License v 2.0",
+          "GNU Lesser General Public License v 3.0",
+          "Mozilla Public License 2.0",
+          "The Unilicense",
+        ],
+        name: "license",
+      },
+      // after the user chooses a license, their choice will go to the renderLicenseBadgeAndLink() function in generateMarkdown.js which will print the correct license name, badge and link to the README
       {
         type: "input",
         message: "Describe your project",
@@ -74,9 +95,14 @@ function questions() {
       },
       {
         type: "input",
-        message: "If no deployed application link, press ENTER",
+        message: "If no deployed application link, press ENTER to continue",
         name: "noDeployedApplicationLink",
         when: (answer) => answer.deployedApplicationLinkConfirm === false,
+        default: (answer) => {
+          if (answer.deployedApplicationLinkConfirm === false) {
+            return "";
+          }
+        },
       },
       // checks if project has a deployed application link; if so, then returns deployed application link in README, if not, user moves on
       // ---- end of Deployed App Link section ----
@@ -102,9 +128,14 @@ function questions() {
       },
       {
         type: "input",
-        message: "If no screenshots, press ENTER",
+        message: "If no screenshots, press ENTER to continue",
         name: "noScreenshots",
         when: (answer) => answer.usageScreenshotsConfirm === false,
+        default: (answer) => {
+          if (answer.usageScreenshotsConfirm === false) {
+            return "";
+          }
+        },
       },
       // checks if project has accompanying screenshots; if so, then requests a certain syntax (for markdown) and returns dynamically created screenshots in README, if not, user moves on
       // ---- end of Screenshots section ----
@@ -174,9 +205,17 @@ function questions() {
         name: "email",
         validate: function (email) {
           // Regex validation
-          return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-            email
-          );
+          if (
+            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+              email
+            ) === true
+          ) {
+            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+              email
+            );
+          } else {
+            return console.log(" Please enter a valid email.");
+          }
         },
       },
       // validates the user entered an email, then returns the user's email in README
