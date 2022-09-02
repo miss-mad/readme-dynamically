@@ -41,7 +41,7 @@ To operate this app, follow these instructions:
 
 ## Usage
 
-Below are screenshots of the Professional README Generator.
+Below is a screenshot of the Professional README Generator.
 
 ![Professional README Generator screenshot 1](./Develop/assets/images/Professional_README_Generator_screenshot_1.JPG)
 
