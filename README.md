@@ -25,6 +25,8 @@ Video link:
 
  * Validation: I received help from a TA in class to use Regex for validating the user input email and URL. For the most part, I got the validation to work, but for the URL I couldn't quite get the Regex code to check for github.com or linkedin.com specifically, just that it contained "http" or "https."
 
+ * Even more dynamic: I'd like to find a way to create an ever more dynamic README in which, if the user says no to the question, that section of the README is omitted entirely. For example, if they do not have a deployed application link of the project that they'd like to add, they would say N to the Y/N confirm question type in the inquirer.prompt function, and then when the README is generated there would be no deployed application link README section at all.
+
 ## Installation
 
 To operate this app, follow these instructions:
@@ -41,8 +43,7 @@ To operate this app, follow these instructions:
 
 Below are screenshots of the Professional README Generator.
 
-![Professional README Generator screenshot 1]()
-![Professional README Generator screenshot 2]()
+![Professional README Generator screenshot 1](./Develop/assets/images/Professional_README_Generator_screenshot_1.JPG)
 
 ## Credits
 

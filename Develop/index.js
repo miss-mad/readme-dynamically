@@ -5,7 +5,6 @@ const fs = require("fs");
 // in this case, information from another js file is imported so that we can use it in this one
 const generateMarkdown = require("./utils/generateMarkdown");
 
-// TODO: Create an array of questions for user input
 function questions() {
   inquirer
     // the following are the list of questions for the user
@@ -108,6 +107,12 @@ function questions() {
       // ----- END OF DEPLOYED APP LINK SECTION -----
       {
         type: "input",
+        message: "What improvements would you make to this app in the future?",
+        name: "futureImprovements",
+      },
+      // returns suggestions for the project's future betterment in README
+      {
+        type: "input",
         message: "Detail how to install this app, step-by-step",
         name: "installation",
       },
@@ -141,12 +146,6 @@ function questions() {
       // -------- END OF SCREENSHOTS SECTION --------
       {
         type: "input",
-        message: "What improvements would you make to this app in the future?",
-        name: "futureImprovements",
-      },
-      // returns suggestions for the project's future betterment in README
-      {
-        type: "input",
         message: "How to contribute:",
         name: "contributing",
       },
@@ -169,55 +168,55 @@ function questions() {
         name: "resourceLinks",
       },
       // returns links to resources or tutorials in README
-      // {
-      //   type: "input",
-      //   message:
-      //     "What is your Github URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://github.com/)",
-      //   name: "github",
-      //   validate: function (github) {
-      //     // Regex validation
-      //     if (/^(ftp|http|https):\/\/[^ "]+$/.test(github) === true) {
-      //       return /^(ftp|http|https):\/\/[^ "]+$/.test(github);
-      //     } else {
-      //       return console.log(" Please enter a valid Github URL.");
-      //     }
-      //   },
-      // },
-      // // validates the user entered a Github URL, then returns the user's Github URL in README
-      // {
-      //   type: "input",
-      //   message:
-      //     "What is your LinkedIn URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://linkedin.com/)",
-      //   name: "linkedIn",
-      //   validate: function (linkedIn) {
-      //     // Regex validation
-      //     if (/^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn) === true) {
-      //       return /^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn);
-      //     } else {
-      //       return console.log(" Please enter a valid LinkedIn URL.");
-      //     }
-      //   },
-      // },
-      // // validates the user entered a LinkedIn URL, then returns the user's linkedin URL in README
-      // {
-      //   type: "input",
-      //   message: "What is your email?",
-      //   name: "email",
-      //   validate: function (email) {
-      //     // Regex validation
-      //     if (
-      //       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-      //         email
-      //       ) === true
-      //     ) {
-      //       return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-      //         email
-      //       );
-      //     } else {
-      //       return console.log(" Please enter a valid email.");
-      //     }
-      //   },
-      // },
+      {
+        type: "input",
+        message:
+          "What is your Github URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://github.com/)",
+        name: "github",
+        validate: function (github) {
+          // Regex validation
+          if (/^(ftp|http|https):\/\/[^ "]+$/.test(github) === true) {
+            return /^(ftp|http|https):\/\/[^ "]+$/.test(github);
+          } else {
+            return console.log(" Please enter a valid Github URL.");
+          }
+        },
+      },
+      // validates the user entered a Github URL, then returns the user's Github URL in README
+      {
+        type: "input",
+        message:
+          "What is your LinkedIn URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://linkedin.com/)",
+        name: "linkedIn",
+        validate: function (linkedIn) {
+          // Regex validation
+          if (/^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn) === true) {
+            return /^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn);
+          } else {
+            return console.log(" Please enter a valid LinkedIn URL.");
+          }
+        },
+      },
+      // validates the user entered a LinkedIn URL, then returns the user's linkedin URL in README
+      {
+        type: "input",
+        message: "What is your email?",
+        name: "email",
+        validate: function (email) {
+          // Regex validation
+          if (
+            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+              email
+            ) === true
+          ) {
+            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+              email
+            );
+          } else {
+            return console.log(" Please enter a valid email.");
+          }
+        },
+      },
       // validates the user entered an email, then returns the user's email in README
     ])
 
@@ -233,12 +232,13 @@ function questions() {
       if (error.isTtyError) {
         console.log(error);
       } else {
-        console.log("Success! (but no README generated - something is probably missing from the generateMarkdown)");
+        console.log(
+          "Success! (but no README generated - something is probably missing from the generateMarkdown)"
+        );
       }
     });
 }
 
-// TODO: Create a function to write README file
 function writeToFile(answers) {
   // "fs" stands for "file-system" and is something built into node.js to allow us to read and write files. in this case, we're writing (creating) a new README.md file and then calling the generateMarkdown() function to populate the file with the format and information we want.
   fs.writeFile("README.md", generateMarkdown(answers), (err) => {
@@ -247,33 +247,9 @@ function writeToFile(answers) {
   });
 }
 
-// TODO: Create a function to initialize app
 // this function calls the questions() function to start the whole thing off
 function init() {
   questions();
 }
 // and of course, we need to call the function that starts everything off
 init();
-
-// GIVEN a command-line application that accepts user input
-
-// WHEN I am prompted for information about my application repository
-// THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-
-// WHEN I enter my project title
-// THEN this is displayed as the title of the README
-
-// WHEN I enter a description, installation instructions, usage information, contribution guidelines, and test instructions
-// THEN this information is added to the sections of the README entitled Description, Installation, Usage, Contributing, and Tests
-
-// WHEN I choose a license for my application from a list of options
-// THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
-
-// WHEN I enter my GitHub username
-// THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
-
-// WHEN I enter my email address
-// THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
-
-// WHEN I click on the links in the Table of Contents
-// THEN I am taken to the corresponding section of the README
