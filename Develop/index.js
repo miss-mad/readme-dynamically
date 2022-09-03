@@ -168,55 +168,55 @@ function questions() {
         name: "resourceLinks",
       },
       // returns links to resources or tutorials in README
-      {
-        type: "input",
-        message:
-          "What is your Github URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://github.com/)",
-        name: "github",
-        validate: function (github) {
-          // Regex validation
-          if (/^(ftp|http|https):\/\/[^ "]+$/.test(github) === true) {
-            return /^(ftp|http|https):\/\/[^ "]+$/.test(github);
-          } else {
-            return console.log(" Please enter a valid Github URL.");
-          }
-        },
-      },
-      // validates the user entered a Github URL, then returns the user's Github URL in README
-      {
-        type: "input",
-        message:
-          "What is your LinkedIn URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://linkedin.com/)",
-        name: "linkedIn",
-        validate: function (linkedIn) {
-          // Regex validation
-          if (/^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn) === true) {
-            return /^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn);
-          } else {
-            return console.log(" Please enter a valid LinkedIn URL.");
-          }
-        },
-      },
-      // validates the user entered a LinkedIn URL, then returns the user's linkedin URL in README
-      {
-        type: "input",
-        message: "What is your email?",
-        name: "email",
-        validate: function (email) {
-          // Regex validation
-          if (
-            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-              email
-            ) === true
-          ) {
-            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-              email
-            );
-          } else {
-            return console.log(" Please enter a valid email.");
-          }
-        },
-      },
+      // {
+      //   type: "input",
+      //   message:
+      //     "What is your Github URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://github.com/)",
+      //   name: "github",
+      //   validate: function (github) {
+      //     // Regex validation
+      //     if (/^(ftp|http|https):\/\/[^ "]+$/.test(github) === true) {
+      //       return /^(ftp|http|https):\/\/[^ "]+$/.test(github);
+      //     } else {
+      //       return console.log(" Please enter a valid Github URL.");
+      //     }
+      //   },
+      // },
+      // // validates the user entered a Github URL, then returns the user's Github URL in README
+      // {
+      //   type: "input",
+      //   message:
+      //     "What is your LinkedIn URL? Paste it here. (Be sure to include the URL's scheme and subdomain as well as domain (https://linkedin.com/)",
+      //   name: "linkedIn",
+      //   validate: function (linkedIn) {
+      //     // Regex validation
+      //     if (/^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn) === true) {
+      //       return /^(ftp|http|https):\/\/[^ "]+$/.test(linkedIn);
+      //     } else {
+      //       return console.log(" Please enter a valid LinkedIn URL.");
+      //     }
+      //   },
+      // },
+      // // validates the user entered a LinkedIn URL, then returns the user's linkedin URL in README
+      // {
+      //   type: "input",
+      //   message: "What is your email?",
+      //   name: "email",
+      //   validate: function (email) {
+      //     // Regex validation
+      //     if (
+      //       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+      //         email
+      //       ) === true
+      //     ) {
+      //       return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+      //         email
+      //       );
+      //     } else {
+      //       return console.log(" Please enter a valid email.");
+      //     }
+      //   },
+      // },
       // validates the user entered an email, then returns the user's email in README
     ])
 
@@ -233,7 +233,8 @@ function questions() {
         console.log(error);
       } else {
         console.log(
-          "Success! (but no README generated - something is probably missing from the generateMarkdown)"
+          "Success! (but no README generated - something is probably missing from the generateMarkdown)",
+          error
         );
       }
     });

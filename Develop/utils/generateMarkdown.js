@@ -1,4 +1,7 @@
 // this function returns a license badge based on which license the user chose
+
+const { up } = require("inquirer/lib/utils/readline");
+
 // if there is no license, it returns an empty string
 function renderLicenseBadge(license) {
   switch (license) {
@@ -53,6 +56,7 @@ const generateMarkdown = ({
   linkedIn,
   email,
 }) => {
+  console.log(installation);
   return `# ${title}
   ${tagline}
   
@@ -77,33 +81,41 @@ const generateMarkdown = ({
   
   ${description}
   
-  ## Deployed Application
-  
-  ${deployedApplicationLink}
+  ${
+    deployedApplicationLink.length > 0
+      ? "## Deployed Application" + "\n     " + deployedApplicationLink
+      : ""
+  }
 
-  ## Future Improvements
+  ${
+    futureImprovements.length > 0
+      ? "## Future Improvements" + "\n     " + " * " + futureImprovements
+      : ""
+  }
 
-  * ${futureImprovements}
-
-  ## Installation
-  
-  ${installation}
+  ${installation.length > 0 ? "## Installation" + "\n     " + installation : ""}
  
-  ## Usage
+  ${
+    uploadScreenshots.length > 0
+      ? "## Usage" +
+        "\n     " +
+        "Below are screenshots of the " +
+        title +
+        "\n     " +
+        uploadScreenshots
+      : ""
+  }
+
+  ${
+    contributing.length > 0
+      ? "## Contributing" +
+        "\n     " +
+        "Thanks for contributing! Instructions to do so are detailed here: " +
+        contributing
+      : ""
+  }
   
-  Below are screenshots of the ${title}.
-  
-  ${uploadScreenshots}
-
-  ## Contributing
-
-  Thanks for contributing! Instructions to do so are detailed here:
-
-  ${contributing}
-
-  ## Tests
-
-  ${tests}
+  ${tests.length > 0 ? "## Tests" + "\n     " + tests : ""}
   
   ## Credits
   
