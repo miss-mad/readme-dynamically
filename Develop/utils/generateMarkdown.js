@@ -39,6 +39,7 @@ function renderLicenseBadge(license) {
 
 // this function creates the README by populating all data from the inquirer.prompt questions into a long backticked section
 // used object desctructuring to pull the properties out of the .prompt within the questions() function
+// within this function, if the user doesn not enter an answer to some of the sections, that section heading will not be included in the final README (ternary operator)
 const generateMarkdown = ({
   title,
   tagline,
@@ -68,12 +69,23 @@ const generateMarkdown = ({
   
   - [License](#license)
   - [Description](#description)
-  - [Installation](#installation)
+  ${
+    deployedApplicationLink.length > 0
+      ? "- [Deployed Application](#deployed-application)"
+      : ""
+  }
+  ${
+    futureImprovements.length > 0
+      ? "- [Future Improvements](#future-improvements)"
+      : ""
+  }
+  ${installation.length > 0 ? "- [Installation](#installation)" : ""}
   - [Usage](#usage)
-  - [Future Improvements](#future-improvements)
-  - [Contributing](#contributing)
-  - [Tests](#tests)
-  - [Credits](#credits)
+  ${contributing.length > 0 ? "- [Contributing](#contributing)" : ""}
+  ${tests.length > 0 ? "- [Tests](#tests)" : ""}
+  ${
+    collaborators.length > 0 && resourceLinks > 0 ? "- [Credits](#credits)" : ""
+  }
   - [Questions](#questions)
   - [License Information](#license-information)
 
@@ -95,16 +107,10 @@ const generateMarkdown = ({
 
   ${installation.length > 0 ? "## Installation" + "\n     " + installation : ""}
  
-  ${
-    uploadScreenshots.length > 0
-      ? "## Usage" +
-        "\n     " +
-        "Below are screenshots of the " +
-        title +
-        "\n     " +
-        uploadScreenshots
-      : ""
-  }
+  ## Usage
+
+  Below are screenshots of the ${title}:
+  ${uploadScreenshots}
 
   ${
     contributing.length > 0
@@ -117,13 +123,17 @@ const generateMarkdown = ({
   
   ${tests.length > 0 ? "## Tests" + "\n     " + tests : ""}
   
-  ## Credits
+  ${
+    collaborators.length > 0
+      ? "## Credits" + "\n     " + "Collaborators: " + collaborators
+      : ""
+  }
   
-  ${collaborators}
-  
-  List of resources used:
-  
-  ${resourceLinks}
+  ${
+    resourceLinks.length > 0
+      ? "List of resources used: " + "\n     " + resourceLinks
+      : ""
+  }
   
   ## Questions
 
