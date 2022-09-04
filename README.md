@@ -21,7 +21,7 @@ This README Generator includes a feature that makes it even more dynamic. If the
 
 This challenge does not include a deployed application. Instead, a screen-recorded video is submitted alongside the github repo link.
 
-Video link:
+Video links:
 
 This video demonstrates the app's full functionality: https://app.castify.com/view/66f572db-21e0-4a2d-ac24-fc18483a8722
 
