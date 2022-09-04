@@ -26,6 +26,12 @@
   ## Deployed Application
      This challenge does not include a deployed application. Instead, a screen-recorded video is submitted alongside the Github repo link.
 
+     Video link:
+
+     This video demonstrates the app's full functionality: https://app.castify.com/view/66f572db-21e0-4a2d-ac24-fc18483a8722
+
+     This video demonstrates the app's dynamic feature in which, if the user doesn't answer certain sections, that section and its corresponding table of contents link is omitted: https://app.castify.com/view/d1cb6d8a-38ce-4710-bdd1-4976fddad4e9
+
   ## Future Improvements
       * 1 - Validation: I received help from a TA in class to use Regex for validating the user input email and URL. For the most part, I got the validation to work, but for the URL I couldn't quite get the Regex code to check for github.com or linkedin.com specifically, just that it contained "http" or "https." 2 - Spacing: When I added the ternary operators to the section headers and table of contents section within the generateMarkdown() function, I noticed that some of the spacing is off when the README generated. The spacing issue doesn't show as much in the README preview, though, which is good. 3 - Strange misspellings? When screen-recording my project, I pasted multiple lines of text from my sample README into the terminal to answer each question quickly in the video. I noticed that in the generated README, some words were missing letters and those letters would appear later on. It seems to be a bug within the integrated terminal in VSCode. Curiously, it did not give me misspellings when running the app through Gitbash. 4 - Licenses: Add an option for no license
 
